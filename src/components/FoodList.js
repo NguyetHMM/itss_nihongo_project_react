@@ -5,8 +5,8 @@ import AddComponet from "./AddEditFood";
 import Food from "./Food";
 import "./FoodList.styles.css";
 
-function FoodList() {
-  
+function FoodList(props) {
+
   const [items, putItems] = React.useState([
     {
       key: getKey(),
@@ -63,6 +63,21 @@ function FoodList() {
     });
     putItems(newItems);
   };
+  console.log(props.toShowFood2);
+  let itemToShow;
+  if(props.toShowFood!=='' && props.toShowFood2!=null){
+    itemToShow = items.filter((item)=>{
+      return item.kind === props.toShowFood && item.done === props.toShowFood2;
+    })
+  } else if (props.toShowFood==='' && props.toShowFood2!=null){
+    itemToShow = items.filter((item)=>{
+      return item.done === props.toShowFood2;
+    })
+  } else if (props.toShowFood!=='' && props.toShowFood2===null){
+    itemToShow = items.filter((item)=>{
+      return item.kind === props.toShowFood;
+    })
+  } else itemToShow = Object.assign(items);
 
   const addNewFood = (data) => {
     putItems([...items, data]);
@@ -121,7 +136,7 @@ function FoodList() {
               </tr>
             </thead>
             <tbody>
-              {items.map((item) => (
+              {itemToShow.map((item) => (
                 <Food
                   key={item.key}
                   item={item}
