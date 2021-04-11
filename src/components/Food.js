@@ -7,7 +7,7 @@ function Food({ item, onCheck }) {
         <tr className={item.done ? 'text-success' : ''}>
             <td style={{textAlign:'center'}}>
                 {item.done ?
-                    <i style={{ fontSize: '25px', color: 'darkseagreen' }} class="fas fa-check-circle" onClick={handleChange} ></i> :
+                    <i style={{ fontSize: '25px', color: 'darkseagreen' }} className="fas fa-check-circle" onClick={handleChange} ></i> :
                     <Image style={{height:'25px'}} src='/eat.png' onClick={handleChange}/> }
             </td>
             <td >{item.name}</td>
