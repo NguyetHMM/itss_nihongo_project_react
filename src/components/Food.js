@@ -1,5 +1,5 @@
 import { Image } from "react-bootstrap";
-function Food({ item, onCheck }) {
+function Food({ item, onCheck, onEdit, onDelete }) {
   const handleChange = () => {
     onCheck(item);
   };
@@ -27,6 +27,15 @@ function Food({ item, onCheck }) {
         ) : (
           <Image style={{ height: "25px" }} src="/food.png" />
         )}
+      </td>
+      <td className="text-center">
+        <button type="button" className="btn btn-warning" onClick={onEdit}>
+          <span className="fa fa-pencil"></span>Edit
+        </button>
+        &nbsp;
+        <button type="button" className="btn btn-danger" onClick={onDelete}>
+          <span className="fa fa-trash"></span>Delete
+        </button>
       </td>
     </tr>
   );

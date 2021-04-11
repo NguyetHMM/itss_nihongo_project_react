@@ -3,6 +3,7 @@ import { Row, Table } from "react-bootstrap";
 import { getKey } from "../lib/util";
 import AddComponet from "./AddEditFood";
 import Food from "./Food";
+import "./FoodList.styles.css";
 
 function FoodList() {
   const [items, putItems] = React.useState([
@@ -42,7 +43,6 @@ function FoodList() {
       done: true,
     },
   ]);
-  const [isForm, setIsForm] = React.useState(false);
   const [editFoodData, setEditFoodData] = React.useState({});
   const handleCheck = (checked) => {
     const newItems = items.map((item) => {
@@ -56,64 +56,87 @@ function FoodList() {
 
   const addNewFood = (data) => {
     putItems([...items, data]);
+    hiddenModel();
   };
 
   const editFood = (data) => {
     putItems(() => items.map((item) => (item.key === data.key ? data : item)));
     setEditFoodData({});
+    hiddenModel();
   };
 
+  const showModal = () => {
+    const modal = document.getElementById("myModal");
+    modal.style.marginTop = "0";
+  };
+
+  const hiddenModel = () => {
+    const modal = document.getElementById("myModal");
+    modal.style.marginTop = "-50%";
+  };
+
+  const deleteFood = (food) => {
+    const index = items.findIndex((item) => item.key === food.key);
+    if (index > -1) {
+      items.splice(index, 1);
+      putItems([...items]);
+    }
+  };
   return (
-    <Row>
-      <div
-        className={isForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : "d-none"}>
-        <AddComponet
-          addNewFood={addNewFood}
-          editFood={editFood}
-          editData={editFoodData}
-          onCloseForm={() => setIsForm(false)}
-        />
+    <>
+      <Row>
+        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <button
+            type="button"
+            className="btn btn-primary mb-10"
+            onClick={showModal}>
+            <span className="fa fa-plus mr-2"></span>Add New Food
+          </button>
+          <br />
+          <br />
+          <Table>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "center", width: "5%" }}>Let's eat</th>
+                <th style={{ width: "20%" }}>Name</th>
+                <th style={{ width: "50%" }}>Address</th>
+                <th style={{ textAlign: "center", width: "5%" }}>Kind</th>
+                <th style={{ textAlign: "center", width: "20%" }}>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {items.map((item) => (
+                <Food
+                  key={item.key}
+                  item={item}
+                  onCheck={handleCheck}
+                  onEdit={() => {
+                    showModal();
+                    setEditFoodData(item);
+                  }}
+                  onDelete={() => deleteFood(item)}
+                />
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </Row>
+      <div id="myModal" className="modalFood">
+        <span className="close" id="close" onClick={hiddenModel}>
+          &times;
+        </span>
+        <div className="content-modal-box">
+          <div className="content" id="modal-content">
+            <AddComponet
+              addNewFood={addNewFood}
+              editFood={editFood}
+              editData={editFoodData}
+              onCloseForm={hiddenModel}
+            />
+          </div>
+        </div>
       </div>
-      <div
-        className={
-          isForm
-            ? "col-xs-8 col-sm-8 col-md-8 col-lg-8"
-            : "col-xs-12 col-sm-12 col-md-12 col-lg-12"
-        }>
-        <button
-          type="button"
-          className="btn btn-primary mb-10"
-          onClick={() => setIsForm(!isForm)}>
-          <span className="fa fa-plus mr-2"></span>Add New Food
-        </button>
-        <br />
-        <br />
-        <Table>
-          <thead>
-            <tr>
-              <th style={{ textAlign: "center" }}>Let's eat</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th style={{ textAlign: "center" }}>Kind</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item) => (
-              <Food
-                key={item.key}
-                item={item}
-                onCheck={handleCheck}
-                // bạn nào viết cái nút edit bắt thì hàm bắt sự kiện click là hàm này nhé
-                onEdit={() => {
-                  setIsForm(true);
-                  setEditFoodData(item);
-                }}
-              />
-            ))}
-          </tbody>
-        </Table>
-      </div>
-    </Row>
+    </>
   );
 }
 export default FoodList;

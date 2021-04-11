@@ -6,7 +6,12 @@ const AddComponet = (props) => {
   const { editData, addNewFood, editFood, onCloseForm } = props;
   const onSubmit = (data, event) => {
     if (editData?.key) {
-      const dataFoodEdit = { ...editData, ...data };
+      const dataFoodEdit = {
+        ...editData,
+        name: data.name ? data.name : editData.name,
+        address: data.address ? data.address : editData.address,
+        kind: data.kind,
+      };
       editFood(dataFoodEdit);
     } else {
       data.key = getKey();
@@ -50,7 +55,7 @@ const AddComponet = (props) => {
             />
           </div>
           <Form.Group controlId="exampleForm.SelectCustomSizeSm">
-            <Form.Label>Custom select Small</Form.Label>
+            <Form.Label>Kind</Form.Label>
             <Form.Control
               as="select"
               size="md"
@@ -58,7 +63,9 @@ const AddComponet = (props) => {
               custom
               {...register("kind")}>
               <option value="food">Food</option>
-              <option value="drink">Drink</option>
+              <option value="drink" selected={editData.kind === "drink"}>
+                Drink
+              </option>
             </Form.Control>
           </Form.Group>
           <br />
