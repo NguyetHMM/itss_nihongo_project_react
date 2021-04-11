@@ -6,6 +6,7 @@ import Food from "./Food";
 import "./FoodList.styles.css";
 
 function FoodList() {
+  
   const [items, putItems] = React.useState([
     {
       key: getKey(),
@@ -43,6 +44,15 @@ function FoodList() {
       done: true,
     },
   ]);
+
+  
+  React.useEffect(() => {
+    var itemsStorage = JSON.parse(localStorage.getItem('items'));
+    if (itemsStorage != null)
+      putItems(itemsStorage);
+  }, []);
+
+
   const [editFoodData, setEditFoodData] = React.useState({});
   const handleCheck = (checked) => {
     const newItems = items.map((item) => {
@@ -82,6 +92,12 @@ function FoodList() {
       putItems([...items]);
     }
   };
+
+  React.useEffect(() => {
+    localStorage.setItem('items', JSON.stringify(items));
+  }, [items]);
+
+
   return (
     <>
       <Row>
