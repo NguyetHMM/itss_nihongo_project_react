@@ -27,6 +27,7 @@ class FilterFood extends Component{
                 name="filterbox"
                 onChange={this.handleChange}
             >
+              <option>{this.props.option0}</option>
               <option value={-1}>{this.props.option1}</option>
               <option value={0}>{this.props.option2}</option>
               <option value={1}>{this.props.option3}</option>

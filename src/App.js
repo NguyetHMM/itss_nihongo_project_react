@@ -55,42 +55,41 @@ class App extends Component {
         <Card style={{textAlign:'center', color:'darkslategrey'}}>
           <Card.Header><h2>My Favorite Foods List</h2></Card.Header>
         </Card>
-        <Row style={{marginTop:'5%', textAlign:'center'}}>
-              <Col sm = {4}><h3>Add or Edit</h3></Col>
-              <Col sm = {8}>
-                <Row>
-                  <Col sm = {2}>
-                    <FilterFood
-                      changeselectedStatus = {this.changeselectedStatus}
-                      filterStatus = "1"
-                      option1 = "All"
-                      option2 = "Doing"
-                      option3 = "Done"
-                    ></FilterFood>
-                  </Col>
-                  <Col sm = {8}><h3>Food List</h3></Col>
-                  <Col sm = {2}>
-                    <FilterFood 
-                      changeselectedKind = {this.changeselectedKind}
-                      filterKind = "1"
-                      option1 = "All"
-                      option2 = "Drink"
-                      option3 = "Food"
-                    ></FilterFood>
-                  </Col>
-                </Row>
+        <Row style={{marginTop:'5%', marginBottom:'2%'}}>
+          <Col sm = {12}>
+            <Row >
+              <Col sm = {1}><h3>Filter</h3></Col>
+              <Col sm = {2}>
+                <FilterFood
+                  changeselectedStatus = {this.changeselectedStatus}
+                  filterStatus = "1"
+                  option0="Filter Status"
+                  option1 = "All"
+                  option2 = "Doing"
+                  option3 = "Done"
+                ></FilterFood>
               </Col>
+              
+              <Col sm = {2}>
+                <FilterFood 
+                  changeselectedKind = {this.changeselectedKind}
+                  filterKind = "1"
+                  option0 = "Filter Kind"
+                  option1 = "All"
+                  option2 = "Drink"
+                  option3 = "Food"
+                ></FilterFood>
+              </Col>
+            </Row>
+          </Col>
         </Row>
         <Row>
-              <Col sm = {4}>
-                {/* Content */}
-              </Col>
-              <Col sm = {8}>
-                <FoodList
-                  toShowFood = {this.state.filterKind}
-                  toShowFood2 = {this.state.filterStatus}
-                ></FoodList>
-              </Col>
+          <Col sm = {12}>
+            <FoodList
+              toShowFood = {this.state.filterKind}
+              toShowFood2 = {this.state.filterStatus}
+            ></FoodList>
+          </Col>
         </Row>
       </Container>
       );
