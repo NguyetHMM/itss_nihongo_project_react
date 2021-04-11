@@ -29,11 +29,19 @@ function Food({ item, onCheck, onEdit, onDelete }) {
         )}
       </td>
       <td className="text-center">
-        <button type="button" className="btn btn-warning" onClick={onEdit}>
+        <button
+          type="button"
+          className="btn btn-warning"
+          onClick={onEdit}
+          style={{ fontSize: "14px" }}>
           <span className="fa fa-pencil"></span>Edit
         </button>
-        &nbsp;
-        <button type="button" className="btn btn-danger" onClick={onDelete}>
+        &nbsp; &nbsp;
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={onDelete}
+          style={{ fontSize: "14px" }}>
           <span className="fa fa-trash"></span>Delete
         </button>
       </td>

@@ -24,7 +24,7 @@ const AddComponet = (props) => {
   return (
     <Card className="panel panel-warning">
       <Card.Header variant="primary" className="d-flex justify-content-between">
-        <span>{editData?.id ? "Edit Food" : "Add New Food"}</span>
+        <span>{editData?.key ? "Edit Food" : "Add New Food"}</span>
         <span
           className="fa fa-times-circle text-right"
           type="button"
@@ -63,7 +63,7 @@ const AddComponet = (props) => {
               custom
               {...register("kind")}>
               <option value="food">Food</option>
-              <option value="drink" selected={editData.kind === "drink"}>
+              <option value="drink" selected={editData?.kind === "drink"}>
                 Drink
               </option>
             </Form.Control>

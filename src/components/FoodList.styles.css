@@ -8,20 +8,8 @@
   font-weight: bold;
   transition: 0.3s;
 }
-.dowloadImage {
-  position: absolute;
-  top: 23px;
-  right: 70px;
-  color: #f1f1f1;
-  font-size: 35px;
-  font-weight: bold;
-  transition: 0.3s;
-  cursor: pointer;
-}
 .close:hover,
-.dowloadImage:hover,
-.close:focus,
-.dowloadImage:focus {
+.close:focus {
   color: #bbb;
   text-decoration: none;
   cursor: pointer;
@@ -37,9 +25,9 @@
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
   margin-top: -50%;
-  transition: margin-top 1s;
+  transition: margin-top 0.5s;
 }
 .content-modal-box {
   display: flex;
