@@ -1,29 +1,37 @@
 import React,{Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FoodList from './FoodList';
 class FilterFood extends Component{
-    constructor(props){
-        super(props);
+    
+    constructor() {
+        super();
         this.state = {
-            filterKind: -1,
+            checkOption: null
         }
-    }
-    onChange = (event) => {
-
-    }
+        this.handleChange = this.handleChange.bind(this);
+      }
+        
+      handleChange(event) {
+        console.log(this.props);
+        if(this.props.filterKind != null){
+            console.log("sap xep theo kind");
+            this.props.changeselectedKind(parseInt(event.target.value));
+        } else if (this.props.filterStatus != null){
+            console.log("sap xep theo status");
+            this.props.changeselectedStatus(parseInt(event.target.value));
+        }
+      }
     render(){
-        var {filterKind} = this.state;
         return (
             <select 
-                className="form-control" 
-                name="filterKind"
-                value = {filterKind}
-                onChange={this.onChange}
+                className="form-control"
+                name="filterbox"
+                onChange={this.handleChange}
             >
-              <option value="grapefruit">All</option>
-              <option value="drink">Drink</option>
-              <option value="food">Food</option>
+              <option value={-1}>{this.props.option1}</option>
+              <option value={0}>{this.props.option2}</option>
+              <option value={1}>{this.props.option3}</option>
             </select>
+
           );
     }
 }

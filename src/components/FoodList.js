@@ -4,7 +4,7 @@ import Food from './Food';
 
 import { getKey } from "../lib/util";
 
-function FoodList() {
+function FoodList(props) {
   const [items, putItems] = React.useState([
     { key: getKey(), name: 'Phở Thìn', address: '13 Lò Đúc', kind: 'food', done: true },
     { key: getKey(), name: 'Phở Lý Quốc Sư', address: '10 Lý Quốc Sư', kind: 'food', done: false },
@@ -21,6 +21,21 @@ function FoodList() {
     });
     putItems(newItems);
   };
+  console.log(props.toShowFood2);
+  let itemToShow;
+  if(props.toShowFood!=='' && props.toShowFood2!=null){
+    itemToShow = items.filter((item)=>{
+      return item.kind === props.toShowFood && item.done === props.toShowFood2;
+    })
+  } else if (props.toShowFood==='' && props.toShowFood2!=null){
+    itemToShow = items.filter((item)=>{
+      return item.done === props.toShowFood2;
+    })
+  } else if (props.toShowFood!=='' && props.toShowFood2===null){
+    itemToShow = items.filter((item)=>{
+      return item.kind === props.toShowFood;
+    })
+  } else itemToShow = Object.assign(items);
   return (
     <Table>
       <thead>
@@ -32,15 +47,15 @@ function FoodList() {
         </tr>
       </thead>
       <tbody>
-        {items.map(item => (
-            <Food
-              key={item.key}
-              item={item}
-              onCheck={handleCheck} />  
+        {itemToShow.map(item => (
+          <Food
+          key={item.key}
+          item={item}
+          onCheck={handleCheck} />    
         ))}
       </tbody>
     </Table>
 
-  );
+  );  
 }
 export default FoodList;
