@@ -58,15 +58,15 @@ class App extends Component {
         <Row style={{marginTop:'5%', marginBottom:'2%'}}>
           <Col sm = {12}>
             <Row >
-              <Col sm = {1}><h3>Filter</h3></Col>
+              {/* <Col sm = {1}><h3>Filter</h3></Col> */}
               <Col sm = {2}>
                 <FilterFood
                   changeselectedStatus = {this.changeselectedStatus}
                   filterStatus = "1"
                   option0="Filter Status"
                   option1 = "All"
-                  option2 = "Doing"
-                  option3 = "Done"
+                  option2 = "Must Try"
+                  option3 = "Yummy"
                 ></FilterFood>
               </Col>
               
