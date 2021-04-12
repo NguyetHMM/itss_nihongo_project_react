@@ -10,12 +10,14 @@ function Food({ item, onCheck, onEdit, onDelete }) {
           <i
             style={{ fontSize: "25px", color: "darkseagreen" }}
             className="fas fa-check-circle"
-            onClick={handleChange}></i>
+            onClick={handleChange}
+            type="button"></i>
         ) : (
           <Image
             style={{ height: "25px" }}
             src="/eat.png"
             onClick={handleChange}
+            type="button"
           />
         )}
       </td>

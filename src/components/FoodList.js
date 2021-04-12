@@ -1,57 +1,18 @@
 import React from "react";
 import { Row, Table } from "react-bootstrap";
+import useStorage from "../hooks/useStorage";
 import { getKey } from "../lib/util";
 import AddComponet from "./AddEditFood";
 import Food from "./Food";
 import "./FoodList.styles.css";
 
 function FoodList(props) {
+  const [items, putItems] = useStorage();
 
-  const [items, putItems] = React.useState([
-    {
-      key: getKey(),
-      name: "Phở Thìn",
-      address: "13 Lò Đúc",
-      kind: "food",
-      done: true,
-    },
-    {
-      key: getKey(),
-      name: "Phở Lý Quốc Sư",
-      address: "10 Lý Quốc Sư",
-      kind: "food",
-      done: false,
-    },
-    {
-      key: getKey(),
-      name: "Strongbow úp ngược vị hoa quả",
-      address: "Funny Monkey, 251 Xã Đàn, Đống Đa",
-      kind: "drink",
-      done: false,
-    },
-    {
-      key: getKey(),
-      name: "Cháo sườn chợ Đồng Xuân",
-      address: "14 Đồng Xuân, Hoàn Kiếm",
-      kind: "food",
-      done: true,
-    },
-    {
-      key: getKey(),
-      name: "Trà sữa lon Hà Nội",
-      address: "Master Tea – 75 Trần Quốc Hoàn, Dịch Vọng Hậu, Cầu Giấy",
-      kind: "drink",
-      done: true,
-    },
-  ]);
-
-  
   React.useEffect(() => {
-    var itemsStorage = JSON.parse(localStorage.getItem('items'));
-    if (itemsStorage != null)
-      putItems(itemsStorage);
+    var itemsStorage = JSON.parse(localStorage.getItem("items"));
+    if (itemsStorage != null) putItems(itemsStorage);
   }, []);
-
 
   const [editFoodData, setEditFoodData] = React.useState({});
   const handleCheck = (checked) => {
@@ -63,20 +24,20 @@ function FoodList(props) {
     });
     putItems(newItems);
   };
-  console.log(props.toShowFood2);
+
   let itemToShow;
-  if(props.toShowFood!=='' && props.toShowFood2!=null){
-    itemToShow = items.filter((item)=>{
+  if (props.toShowFood !== "" && props.toShowFood2 != null) {
+    itemToShow = items.filter((item) => {
       return item.kind === props.toShowFood && item.done === props.toShowFood2;
-    })
-  } else if (props.toShowFood==='' && props.toShowFood2!=null){
-    itemToShow = items.filter((item)=>{
+    });
+  } else if (props.toShowFood === "" && props.toShowFood2 != null) {
+    itemToShow = items.filter((item) => {
       return item.done === props.toShowFood2;
-    })
-  } else if (props.toShowFood!=='' && props.toShowFood2===null){
-    itemToShow = items.filter((item)=>{
+    });
+  } else if (props.toShowFood !== "" && props.toShowFood2 === null) {
+    itemToShow = items.filter((item) => {
       return item.kind === props.toShowFood;
-    })
+    });
   } else itemToShow = Object.assign(items);
 
   const addNewFood = (data) => {
@@ -109,9 +70,8 @@ function FoodList(props) {
   };
 
   React.useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem("items", JSON.stringify(items));
   }, [items]);
-
 
   return (
     <>
